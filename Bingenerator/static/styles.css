@@ -1,0 +1,97 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #101820;
+    color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #1f2a38;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #00ffe1;
+}
+
+.highlight {
+    color: #ff4081;
+}
+
+.form-box label {
+    display: block;
+    margin-top: 15px;
+}
+
+input[type="text"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 8px;
+    background-color: #29394d;
+    color: #fff;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #00bcd4;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #0097a7;
+}
+
+.secondary {
+    background-color: #607d8b;
+}
+
+.secondary:hover {
+    background-color: #455a64;
+}
+
+.links {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.links a {
+    color: #00e676;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.flashes {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.flashes li.success {
+    color: #00e676;
+}
+
+.flashes li.danger {
+    color: #ff1744;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Tarjetas</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Tarjetas CC <span class="highlight">EL YISUS</span></h1>
+        <form method="POST" action="/" class="form-box">
+            <label for="bin">BIN (usa x para aleatorios):</label>
+            <input type="text" id="bin" name="bin" placeholder="Ej: 453900 o 453900xxxxxxxx" required>
+
+            <div class="select-group">
+                <div>
+                    <label for="mes">Mes:</label>
+                    <select name="mes" id="mes">
+                        <option value="aleatorio">Aleatorio</option>
+                        {% for i in range(1, 13) %}
+                            <option value="{{'%02d' % i}}">{{'%02d' % i}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="año">Año:</label>
+                    <select name="año" id="año">
+                        <option value="aleatorio">Aleatorio</option>
+                        {% for i in range(25, 31) %}
+                            <option value="{{'%02d' % i}}">{{'%02d' % i}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="cantidad">Cantidad:</label>
+                    <select name="cantidad" id="cantidad">
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Generar</button>
+        </form>
+
+        {% if tarjetas %}
+        <h2>Resultados:</h2>
+        <form method="POST" action="/guardar">
+            <textarea id="resultado" name="tarjetas" rows="10">{{ tarjetas|join('\n') }}</textarea>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button type="submit" class="btn">Guardar</button>
+                <button type="button" class="btn secondary" onclick="copiarAlPortapapeles()">Copiar</button>
+            </div>
+        </form>
+        {% endif %}
+
+        <form method="POST" action="/bin_checker">
+            <input type="hidden" name="bin" value="{{ request.form['bin'] if request.form['bin'] else '' }}">
+            <button type="submit" class="btn secondary">Verificar BIN</button>
+        </form>
+
+        <div class="links">
+            <a href="/ver_guardadas">📄 Ver Guardadas</a>
+            <a href="https://temp-mail.org/es/" target="_blank">✉️ Correo Temporal</a>
+            <a href="/creditos">💡 Créditos</a>
+            <a href="/info">ℹ️ Información</a>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+
+    <script>
+        function copiarAlPortapapeles() {
+            const textarea = document.getElementById("resultado");
+            textarea.select();
+            document.execCommand("copy");
+            alert("✅ Tarjetas copiadas al portapapeles");
+        }
+    </script>
+</body>
+</html>
